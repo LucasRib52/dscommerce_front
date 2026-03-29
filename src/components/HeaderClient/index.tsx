@@ -1,3 +1,4 @@
+import "./styles.css";
 import cartIcon from "../../assets/cart.svg";
 
 function HeaderClient() {

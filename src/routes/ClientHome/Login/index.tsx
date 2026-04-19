@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { loginRequest } from "../../../services/auth-services";
 import "./styles.css";
+import { useState } from "react";
 import type { CredentialsDTO } from "../../../models/auth";
+import * as authService from "../../../services/auth-service";
 
 function Login() {
   const [formData, setFormData] = useState<CredentialsDTO>({
@@ -11,7 +11,14 @@ function Login() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    loginRequest(formData);
+    authService
+      .loginRequest(formData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("erro no login", error);
+      });
   }
 
   function handleInputChange(event: any) {

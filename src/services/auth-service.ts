@@ -1,5 +1,9 @@
 import QueryString from "qs";
-import type { AccessTokenPayloadDTO, CredentialsDTO } from "../models/auth";
+import type {
+  AccessTokenPayloadDTO,
+  CredentialsDTO,
+  RoleEnum,
+} from "../models/auth";
 import { CLIENT_ID, CLIENT_SECRET, TOKEN_KEY } from "../utils/system";
 import type { AxiosRequestConfig } from "axios";
 import { requestBackend } from "../utils/requests";

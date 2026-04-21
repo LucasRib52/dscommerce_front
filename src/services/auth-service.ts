@@ -58,3 +58,19 @@ export function isAuthenticated(): boolean {
   }
   return false;
 }
+
+export function hasAnyRoles(roles: RoleEnum[]): boolean {
+  if (roles.length === 0) {
+    return true;
+  }
+  const tokenPayload = getAccessTokenPayload();
+  if (tokenPayload !== undefined) {
+    for (let i = 0; i < roles.length; i++) {
+      if (tokenPayload.authorities.includes(roles[i])) {
+        return true;
+      }
+    }
+    //return roles.some(role => tokenData.authorities.includes(role));
+  }
+  return false;
+}

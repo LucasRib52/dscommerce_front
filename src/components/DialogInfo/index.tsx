@@ -1,11 +1,24 @@
 import ButtonPrimary from "../ButtonPrimary";
 
-function DialogInfo() {
+type Props = {
+  message: string;
+  onDialogClose: Function;
+};
+
+function DialogInfo({ message, onDialogClose }: Props) {
   return (
-    <div className="dsc-dialog-backgroud">
-      <div className="dsc-dialog-box">
-        <h2>Sucesso!</h2>
-        <ButtonPrimary text="Ok" />
+    <div className="dsc-dialog-backgroud" onClick={() => onDialogClose()}>
+      <div
+        className="dsc-dialog-box"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <h2>{message}</h2>
+        <div
+          className="dsc-dialog-btn-container"
+          onClick={() => onDialogClose()}
+        >
+          <ButtonPrimary text="Ok" />
+        </div>
       </div>
     </div>
   );

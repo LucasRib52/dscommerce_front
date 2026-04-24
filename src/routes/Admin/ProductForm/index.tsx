@@ -17,6 +17,8 @@ function ProductForm() {
       name: "name",
       type: "text",
       placeholder: "Nome",
+      dirty: "false",
+      invalid: "false",
     },
     price: {
       value: "",
@@ -28,6 +30,8 @@ function ProductForm() {
         return Number(value) > 0;
       },
       message: "Favor informar um valor positivo",
+      dirty: "false",
+      invalid: "false",
     },
     imgUrl: {
       value: "",
@@ -35,6 +39,8 @@ function ProductForm() {
       name: "imgUrl",
       type: "text",
       placeholder: "Imagem",
+      dirty: "false",
+      invalid: "false",
     },
   });
 
@@ -58,6 +64,11 @@ function ProductForm() {
     setFormData(dataValidated);
   }
 
+  function handleTurnDirty(name: string) {
+    const newFormData = forms.toDirty(formData, name);
+    setFormData(newFormData);
+  }
+
   return (
     <main>
       <section id="product-form-section" className="dsc-container">
@@ -69,6 +80,7 @@ function ProductForm() {
                 <FormInput
                   {...formData.name}
                   className="dsc-form-control"
+                  onTurnyDirty={handleTurnDirty}
                   onChange={handleInputChange}
                 />
                 <div className="dsc-form-error">{formData.name.message}</div>
@@ -77,6 +89,7 @@ function ProductForm() {
                 <FormInput
                   {...formData.price}
                   className="dsc-form-control"
+                  onTurnyDirty={handleTurnDirty}
                   onChange={handleInputChange}
                 />
                 <div className="dsc-form-error">{formData.price.message}</div>
@@ -85,6 +98,7 @@ function ProductForm() {
                 <FormInput
                   {...formData.imgUrl}
                   className="dsc-form-control"
+                  onTurnyDirty={handleTurnDirty}
                   onChange={handleInputChange}
                 />
               </div>

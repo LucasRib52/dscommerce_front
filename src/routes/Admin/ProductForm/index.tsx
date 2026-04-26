@@ -17,8 +17,10 @@ function ProductForm() {
       name: "name",
       type: "text",
       placeholder: "Nome",
-      dirty: "false",
-      invalid: "false",
+      validation: function (value: string) {
+        return /^.{3,80}$/.test(value);
+      },
+      message: "Favor informar um nome de 3 a 80 caracteres",
     },
     price: {
       value: "",
@@ -30,8 +32,6 @@ function ProductForm() {
         return Number(value) > 0;
       },
       message: "Favor informar um valor positivo",
-      dirty: "false",
-      invalid: "false",
     },
     imgUrl: {
       value: "",
@@ -39,8 +39,6 @@ function ProductForm() {
       name: "imgUrl",
       type: "text",
       placeholder: "Imagem",
-      dirty: "false",
-      invalid: "false",
     },
   });
 

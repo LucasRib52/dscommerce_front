@@ -11,6 +11,8 @@ function Login() {
 
   const navigate = useNavigate();
 
+  const [submitResponseFail, setSubmitResponseFail] = useState(false);
+
   const [formData, setFormData] = useState<any>({
     username: {
       value: "",
@@ -36,6 +38,15 @@ function Login() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
+
+    setSubmitResponseFail(false);
+
+    const formDataValidated = forms.dirtyAndValidateAll(formData);
+    if (forms.hasAnyInvalid(formDataValidated)) {
+      setFormData(formDataValidated);
+      return;
+    }
+
     authService
       .loginRequest(forms.toValues(formData))
       .then((response) => {
@@ -43,8 +54,8 @@ function Login() {
         setContextTokenPayload(authService.getAccessTokenPayload());
         navigate("/cart");
       })
-      .catch((error) => {
-        console.log("erro no login", error);
+      .catch(() => {
+        setSubmitResponseFail(true);
       });
   }
 
@@ -90,6 +101,12 @@ function Login() {
                 />
               </div>
             </div>
+
+            {submitResponseFail && (
+              <div className="dsc-form-global-error">
+                Usuario ou senha invalidos
+              </div>
+            )}
 
             <div className="dsc-login-form-buttons dsc-mt20">
               <button type="submit" className="dsc-btn dsc-btn-blue">

@@ -13,7 +13,7 @@ export function toValues(inputs: any) {
 export function updateAll(inputs: any, newValues: any) {
   const newInputs: any = {};
   for (var name in inputs) {
-    newInputs[name] = { ...inputs, value: newValues[name] };
+    newInputs[name] = { ...inputs[name], value: newValues[name] };
   }
   return newInputs;
 }
